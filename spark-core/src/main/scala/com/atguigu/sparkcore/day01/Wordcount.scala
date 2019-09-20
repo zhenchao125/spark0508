@@ -20,10 +20,11 @@ object Wordcount {
             .flatMap(_.split(","))
             .map((_, 1))
             .reduceByKey(_ + _)
-        
+        rdd.take()
         // 3. 行动
         val result: Array[(String, Int)] = rdd.collect()
         result.foreach(println)
+        
         
         // 4. 关闭上下文
         sc.stop()
