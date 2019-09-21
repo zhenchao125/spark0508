@@ -1,5 +1,7 @@
 package com.atguigu.sqlproject
 
+import java.text.DecimalFormat
+
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
 import org.apache.spark.sql.types._
@@ -69,5 +71,6 @@ class CityRemarkUDAF extends UserDefinedAggregateFunction {
 }
 
 case class CityRemark(cityName: String, rate: Double){
-    override def toString: String = s"$cityName:$rate"
+    val formater = new DecimalFormat(".00%")
+    override def toString: String = s"$cityName:${formater.format(rate)}"
 }
