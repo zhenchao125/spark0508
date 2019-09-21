@@ -3,15 +3,16 @@ package com.atgugui.day01.udf
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
 import org.apache.spark.sql.types.{DataType, DoubleType, StructField, StructType}
+
 /*
 sum(salary)
  */
-class MySum extends UserDefinedAggregateFunction{
+class MySum extends UserDefinedAggregateFunction {
     // 定义聚合函数输入数据的类型    Double ...
-    override def inputSchema: StructType = StructType(StructField("column", DoubleType):: Nil)
+    override def inputSchema: StructType = StructType(StructField("column", DoubleType) :: Nil)
     
     // 缓冲区的数据类型
-    override def bufferSchema: StructType = StructType(StructField("sum", DoubleType):: Nil)
+    override def bufferSchema: StructType = StructType(StructField("sum", DoubleType) :: Nil)
     
     // 最终的返回值类型
     override def dataType: DataType = DoubleType
@@ -23,7 +24,7 @@ class MySum extends UserDefinedAggregateFunction{
     override def initialize(buffer: MutableAggregationBuffer): Unit = buffer(0) = 0d
     
     
-    // 分区的聚合
+    // 分区内的聚合
     override def update(buffer: MutableAggregationBuffer, input: Row): Unit = {
         buffer(0) = buffer.getDouble(0) + input.getAs[Double](0)
     }
@@ -34,5 +35,5 @@ class MySum extends UserDefinedAggregateFunction{
     }
     
     // 返回最终的值
-    override def evaluate(buffer: Row): Double =buffer.getDouble(0)
+    override def evaluate(buffer: Row): Double = buffer.getDouble(0)
 }
