@@ -14,6 +14,8 @@ object SqlPractice {
             .appName("SqlPractice")
             .enableHiveSupport()
             .getOrCreate()
+        spark.udf.register("remark", new CityRemarkUDAF)
+        
         spark.sql("use sql_project")
         // 表之间的管理
         spark.sql(
@@ -32,7 +34,8 @@ object SqlPractice {
               |select
               |	t1.area,
               |	t1.product_name,
-              |	count(*) click_count
+              |	count(*) click_count,
+              | remark(city_name) remark
               |from t1
               |group by area, product_name
             """.stripMargin).createOrReplaceTempView("t2")
@@ -50,10 +53,11 @@ object SqlPractice {
               |select
               |	area,
               |	product_name,
-              |	click_count
+              |	click_count,
+              | remark
               |from t3
               |where rank<=3
-            """.stripMargin).show(100)
+            """.stripMargin).show(100, false)
         spark.close()
     }
 }
