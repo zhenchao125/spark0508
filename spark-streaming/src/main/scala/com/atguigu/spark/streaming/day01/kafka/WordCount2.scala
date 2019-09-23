@@ -27,7 +27,7 @@ object WordCount2 {
             ConsumerConfig.GROUP_ID_CONFIG -> group,
             ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG -> brokers
         )
-    
+        
         // 泛型12: kev,vlaue的类型   泛型34: keyvalue的解码器
         val sourceDStream: InputDStream[(String, String)] = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
             ssc,
@@ -40,7 +40,7 @@ object WordCount2 {
     }
     
     def main(args: Array[String]): Unit = {
-        
+        //
         val ssc: StreamingContext = StreamingContext.getActiveOrCreate("./ck1", createSSc)
         
         ssc.start()
