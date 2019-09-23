@@ -28,7 +28,6 @@ object WordCount2 {
             Thread.sleep(2000)
         }
         ssc.awaitTermination()
-        
     }
 }
 /*
