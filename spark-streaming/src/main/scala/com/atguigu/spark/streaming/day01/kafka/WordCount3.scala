@@ -41,8 +41,8 @@ object WordCount3 {
                     val topicAndPartitionOffsetMap: Map[TopicAndPartition, Long] = topicAndPatitionOffsetEither.right.get
                     reslutMap ++= topicAndPartitionOffsetMap
                 } else { // 表示第一次消费分区  把每个分区的偏移量置为0
-                    topicAndPationSet.foreach(tap => {
-                        reslutMap += tap -> 0L
+                    topicAndPationSet.foreach(topicAndPation => {
+                        reslutMap += topicAndPation -> 0L
                     })
                 }
             
