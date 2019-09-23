@@ -28,7 +28,7 @@ object WordCount2 {
             ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG -> brokers
         )
         
-        // 泛型12: kev,vlaue的类型   泛型34: keyvalue的解码器
+        // 泛型12: key,vlaue的类型   泛型34: keyvalue的解码器
         val sourceDStream: InputDStream[(String, String)] = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
             ssc,
             kafkaParams,
