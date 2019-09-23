@@ -34,9 +34,7 @@ object WordCount2 {
             kafkaParams,
             Set(topic))
         sourceDStream.print
-        
         ssc
-        
     }
     
     def main(args: Array[String]): Unit = {
