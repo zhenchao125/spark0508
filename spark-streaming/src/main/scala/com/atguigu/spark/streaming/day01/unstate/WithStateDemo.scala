@@ -25,6 +25,5 @@ object WithStateDemo {
         
         ssc.start()
         ssc.awaitTermination()
-        
     }
 }
